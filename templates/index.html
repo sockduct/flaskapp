@@ -3,7 +3,7 @@
 {% block content %}
 	{% for journal in journals %}
         <p>
-            <b>{{ journals[journal].title }} by {{ journals[journal].user }}:</b>
+            <b>{{ journal }} by {{ journals[journal].user }}:</b>
             <br>
             {{ journals[journal].text }}
         </p>
