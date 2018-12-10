@@ -1,0 +1,27 @@
+<html>
+    <head>
+        {# This is a Jinja2 comment line. #}
+        {# Jinja2 renders templates - anything between curly braces is interpreted
+           by Jinja2. #}
+        {% if title %}
+            <title>The Journal - {{ title }}</title>
+        {% else %}
+            <title>Welcome to the Journal!</title>
+        {% endif %}
+    </head>
+    <body>
+        <div>
+            <h2>The Journal{% if title %} - {{ title }}: {% else %}:{% endif %}
+            {# Rather than using explicit URLs which may be difficult to update
+               later on, use url_for and the view function which handles the URL. #}
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ url_for('main') }}">Home</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ url_for('login') }}">Login</a>
+            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ url_for('register') }}">Sign Up</a></h2>
+        </div>
+
+        {# This section will be filled in by specific templates: #}
+        {% block content %}
+        {% endblock %}
+    </body>
+</html>
+

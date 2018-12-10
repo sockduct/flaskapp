@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 
 from dotenv import load_dotenv
-from flask import Flask
+from flask import Flask, render_template
 import os
 from werkzeug import check_password_hash, generate_password_hash
 
@@ -15,22 +15,28 @@ users = {'test': ''}
 test_passwd = os.environ.get('TEST_PASSWD')
 users['test'] = test_passwd
 journals = {'Test': {'user': 'test',
-                     'text': 'This is a test journal entry.'}}
+                     'title': 'Bootstrap',
+                     'text': 'This is a test journal entry.'},
+            'Two': {'user': 'test',
+                    'title': 'Sequel',
+                    'text': 'How about one more test entry.  This allows a '
+                            'little better validation.'}
+           }
 
 
 @app.route('/')
 def main():
-    return '<h1>Welcome to the Journal!</h1>'
+    return render_template('index.html', journals=journals)
 
 
 @app.route('/register')
 def register():
-    return '<h1>User Sign Up</h1>'
+    return render_template('register.html', title='User Sign Up')
 
 
 @app.route('/login')
 def login():
-    return '<h1>User Login</h1>'
+    return render_template('login.html', title='User Login')
 
 
 @app.route('/logout')
@@ -40,5 +46,5 @@ def logout():
 
 @app.route('/entry')
 def entry():
-    return '<h1>Create A Journal Entry</h1>'
+    return render_template('entry.html', title='Create an Entry')
 
