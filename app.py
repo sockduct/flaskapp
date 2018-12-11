@@ -81,6 +81,16 @@ def load_user(id):
             return users[user]
 
 
+@app.errorhandler(404)
+def not_found_error(error):
+    return render_template('404.html'), 404
+
+
+@app.errorhandler(500)
+def internal_error(error):
+    return render_template('500.html'), 500
+
+
 @app.route('/')
 def main():
     return render_template('index.html', journals=journals)
@@ -132,4 +142,10 @@ def entry():
         flash('Your entry is now live!')
         return redirect(url_for('main'))
     return render_template('entry.html', title='Create an Entry', form=form)
+
+
+@app.route('/crashme')
+def crashme():
+    localvar = 'You can see me in the debugger!'
+    raise Exception('I\'m crashing on purpose!')
 

@@ -1,0 +1,8 @@
+{% extends "base.html" %}
+
+{% block content %}
+    <h1>Hmmmm - I can't find that...</h1>
+	<img src="{{ url_for('static', filename='homer-doh.png') }}">
+    <p><a href="{{ url_for('main') }}">Back</a></p>
+{% endblock %}
+
