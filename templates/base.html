@@ -11,13 +11,20 @@
     </head>
     <body>
         <div>
-            <h2>The Journal{% if title %} - {{ title }}: {% else %}:{% endif %}
             {# Rather than using explicit URLs which may be difficult to update
                later on, use url_for and the view function which handles the URL. #}
             &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ url_for('main') }}">Home</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ url_for('login') }}">Login</a>
-            &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ url_for('register') }}">Sign Up</a></h2>
+            {% if current_user.is_anonymous %}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ url_for('login') }}">Login</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ url_for('register') }}">Sign Up</a>
+            {% else %}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ url_for('entry') }}">Create a Journal Entry</a>
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;Logged in as {{ current_user.username }}
+                &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;<a href="{{ url_for('logout') }}">Logout</a>
+            {% endif %}
         </div>
+        <hr>
+        <h2>The Journal{% if title %} - {{ title }}: {% else %}:{% endif %}</h2>
         <hr>
 
         {# Flashed messages are one time notification messsages to users #}

@@ -5,7 +5,7 @@
         {{ form.hidden_tag() }}
         <p>
             {{ form.title.label }}<br>
-            {{ form.title(size=32) }}<br>
+            {{ form.title(size=32, autofocus=true) }}<br>
             {% for error in form.title.errors %}
                 <span style="color: red;">[{{ error }}]</span>
             {% endfor %}
